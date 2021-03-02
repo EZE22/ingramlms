@@ -1,0 +1,12 @@
+                        Ingram Learning Management System (LMS)
+Ideas
+    1.	LMS
+Git
+    2.	GitHub / GitLab
+    3.	GitKraken
+Database
+    4.	MySQL
+Backend
+    5.	Java
+Frontend
+    6.	React
