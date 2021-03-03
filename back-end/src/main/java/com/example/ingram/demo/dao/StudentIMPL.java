@@ -34,15 +34,16 @@ public class StudentIMPL implements StudentDAO{
 
     @Override
     @Transactional
-    public Object findById(int theId) {
+    public Object save(Student theStudent) {
+        Session currentSession = entityManager.unwrap(Session.class);
+        currentSession.saveOrUpdate(theStudent);
         return null;
     }
 
     @Override
     @Transactional
-    public void save(Student theStudent) {
-        Session currentSession = entityManager.unwrap(Session.class);
-        currentSession.saveOrUpdate(theStudent);
+    public Object findById(int theId) {
+        return null;
     }
 
     @Override

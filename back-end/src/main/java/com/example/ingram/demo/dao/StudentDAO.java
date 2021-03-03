@@ -7,6 +7,6 @@ import java.util.List;
 public interface StudentDAO {
     List<Student> findAll();
     Object findById(int theId);
-    void save(Student theEmployee);
+    Object save(Student theEmployee);
     void deleteById(int theId);
 }
