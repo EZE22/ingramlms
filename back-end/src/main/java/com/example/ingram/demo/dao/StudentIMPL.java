@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class StudentIMPL implements StudentDAO{
@@ -25,10 +27,6 @@ public class StudentIMPL implements StudentDAO{
     public List<Student> findAll() {
         Session currentSession = entityManager.unwrap(Session.class);
         Query<Student> studentData = currentSession.createQuery("from Student");
-
-        System.out.println(studentData.getResultList());
-        studentData.getResultList().forEach((student) -> System.out.println(student.getFirstName()));
-
         return studentData.getResultList();
     }
 
