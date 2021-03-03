@@ -1,19 +1,35 @@
 package com.example.ingram.demo.dao;
 
+import com.example.ingram.demo.entity.Student;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
 public class StudentIMPL implements StudentDAO{
-    //TODO add the entity manager / Constructor Injection
 
+    private final EntityManager entityManager;
+
+    @Autowired
+    public StudentIMPL(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     @Transactional
-    public List<Object> findAll() {
-        return null;
+    public List<Student> findAll() {
+        Session currentSession = entityManager.unwrap(Session.class);
+        Query<Student> studentData = currentSession.createQuery("from Student");
+
+        System.out.println(studentData.getResultList());
+        studentData.getResultList().forEach((student) -> System.out.println(student.getFirstName()));
+
+        return studentData.getResultList();
     }
 
     @Override
@@ -24,8 +40,9 @@ public class StudentIMPL implements StudentDAO{
 
     @Override
     @Transactional
-    public void save(Object theEmployee) {
-
+    public void save(Student theStudent) {
+        Session currentSession = entityManager.unwrap(Session.class);
+        currentSession.saveOrUpdate(theStudent);
     }
 
     @Override

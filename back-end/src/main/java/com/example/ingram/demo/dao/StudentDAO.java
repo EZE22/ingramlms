@@ -1,10 +1,12 @@
 package com.example.ingram.demo.dao;
 
+import com.example.ingram.demo.entity.Student;
+
 import java.util.List;
 
 public interface StudentDAO {
-    List<Object> findAll();
+    List<Student> findAll();
     Object findById(int theId);
-    void save(Object theEmployee);
+    void save(Student theEmployee);
     void deleteById(int theId);
 }
