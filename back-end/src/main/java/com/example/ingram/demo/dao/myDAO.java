@@ -4,9 +4,9 @@ import com.example.ingram.demo.entity.Student;
 
 import java.util.List;
 
-public interface StudentDAO {
-    List<Student> findAll();
+public interface myDAO {
+    List<Object> findAll();
     Object findById(int theId);
-    Object saveOrUpdate(Student theEmployee);
+    Object saveOrUpdate(Object theEmployee);
     String deleteById(int theId);
 }

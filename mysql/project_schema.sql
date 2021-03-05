@@ -6,6 +6,6 @@ CREATE TABLE `login` (
   `username` varchar(45) DEFAULT NULL, 
   `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`));
-
-INSERT INTO `student` VALUES 
+  
+INSERT INTO `login` VALUES 
 (1,'ingram22', 'everett.ingram22@gmail.com')
