@@ -2,6 +2,7 @@ package com.example.ingram.demo.dao;
 
 import com.example.ingram.demo.entity.Student;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,7 +33,7 @@ public class StudentIMPL implements StudentDAO{
 
     @Override
     @Transactional
-    public Object save(Student theStudent) {
+    public Object saveOrUpdate(Student theStudent) {
         Session currentSession = entityManager.unwrap(Session.class);
         currentSession.saveOrUpdate(theStudent);
         return null;
@@ -41,12 +42,15 @@ public class StudentIMPL implements StudentDAO{
     @Override
     @Transactional
     public Object findById(int theId) {
-        return null;
+        Session currentSession = entityManager.unwrap(Session.class);
+        return currentSession.get(Student.class, theId);
     }
 
     @Override
     @Transactional
     public void deleteById(int theId) {
-
+        Session currentSession = entityManager.unwrap(Session.class);
+        Student temp = currentSession.get(Student.class, theId);
+        currentSession.saveOrUpdate(temp);
     }
 }
