@@ -36,7 +36,7 @@ public class StudentIMPL implements StudentDAO{
     public Object saveOrUpdate(Student theStudent) {
         Session currentSession = entityManager.unwrap(Session.class);
         currentSession.saveOrUpdate(theStudent);
-        return null;
+        return theStudent;
     }
 
     @Override
@@ -48,9 +48,21 @@ public class StudentIMPL implements StudentDAO{
 
     @Override
     @Transactional
-    public void deleteById(int theId) {
+    public String deleteById(int theId) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Student temp = currentSession.get(Student.class, theId);
-        currentSession.saveOrUpdate(temp);
+        Student tempStudent = currentSession.get(Student.class, theId);
+        String failureMessage = "Student not found with id: "
+                + theId
+                + " \nPlease try again. :)";
+        try {
+            if(tempStudent == null) {
+                throw new Exception(failureMessage);
+            }
+            currentSession.delete(tempStudent);
+            return "You have successfully deleted the student with ID: " + theId;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return failureMessage;
+        }
     }
 }

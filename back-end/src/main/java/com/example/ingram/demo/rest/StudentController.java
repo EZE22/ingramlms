@@ -31,7 +31,9 @@ public class StudentController {
         return studentDAO.saveOrUpdate(student);
     }
 
-    //TODO Find By ID
-
+    @DeleteMapping("/deleteStudent/{studentId}")
+    public String deleteStudent(@PathVariable int studentId) {
+        return studentDAO.deleteById(studentId);
+    }
 
 }

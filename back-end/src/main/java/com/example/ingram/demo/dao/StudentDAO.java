@@ -8,5 +8,5 @@ public interface StudentDAO {
     List<Student> findAll();
     Object findById(int theId);
     Object saveOrUpdate(Student theEmployee);
-    void deleteById(int theId);
+    String deleteById(int theId);
 }
