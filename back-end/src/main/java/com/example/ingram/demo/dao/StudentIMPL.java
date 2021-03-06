@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class StudentIMPL implements myDAO {
+public class StudentIMPL implements StudentDAO {
 
     private final EntityManager entityManager;
 
@@ -21,16 +21,16 @@ public class StudentIMPL implements myDAO {
 
     @Override
     @Transactional
-    public List<Object> findAll() {
+    public List<Student> findAll() {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Object> studentData = currentSession.createQuery("from Student");
+        Query<Student> studentData = currentSession.createQuery("from Student");
 
         return studentData.getResultList();
     }
 
     @Override
     @Transactional
-    public Object saveOrUpdate(Object theStudent) {
+    public Student saveOrUpdate(Student theStudent) {
         Session currentSession = entityManager.unwrap(Session.class);
         currentSession.saveOrUpdate(theStudent);
         return theStudent;
@@ -38,7 +38,7 @@ public class StudentIMPL implements myDAO {
 
     @Override
     @Transactional
-    public Object findById(int theId) {
+    public Student findById(int theId) {
         Session currentSession = entityManager.unwrap(Session.class);
         return currentSession.get(Student.class, theId);
     }

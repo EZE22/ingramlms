@@ -1,39 +1,39 @@
 package com.example.ingram.demo.rest;
 
-import com.example.ingram.demo.dao.myDAO;
 import com.example.ingram.demo.entity.Student;
+import com.example.ingram.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class StudentController {
 
-    private final myDAO myDAO;
+    private final StudentService studentService;
 
     @Autowired
-    public StudentController(myDAO myDAO) {
-        this.myDAO = myDAO;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @GetMapping("/getAllStudents")
     public Object getAllStudents() {
-        return myDAO.findAll();
+        return studentService.findAll();
     }
 
     @PostMapping("/createStudent")
     public Object createStudent(@RequestBody Student student) {
         student.setId(0);
-        return myDAO.saveOrUpdate(student);
+        return studentService.saveOrUpdate(student);
     }
 
     @PutMapping("/updateStudent")
     public Object updateStudent(@RequestBody Student student) {
-        return myDAO.saveOrUpdate(student);
+        return studentService.saveOrUpdate(student);
     }
 
     @DeleteMapping("/deleteStudent/{studentId}")
     public String deleteStudent(@PathVariable int studentId) {
-        return myDAO.deleteById(studentId);
+        return studentService.deleteById(studentId);
     }
 
 }
