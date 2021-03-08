@@ -6,13 +6,11 @@ import javax.persistence.*;
 @Table(name = "student")
 public class Student {
 
+    //Define fields and annotate them with db column names
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
-    @Column(name = "job_title")
-    private String jobTitle;
 
     @Column(name = "first_name")
     private String firstName;
@@ -23,13 +21,17 @@ public class Student {
     @Column(name = "email")
     private String email;
 
+    //Set up mapping to StudentProgress
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_progress_id")
+    private StudentProgress studentProgress;
+
     //Default Constructor
     public Student() {
     }
 
     //Parameterized Constructor without ID
-    public Student(String jobTitle, String firstName, String lastName, String email) {
-        this.jobTitle = jobTitle;
+    public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -41,14 +43,6 @@ public class Student {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
     }
 
     public String getFirstName() {
@@ -75,14 +69,22 @@ public class Student {
         this.email = email;
     }
 
+    public StudentProgress getStudentProgress() {
+        return studentProgress;
+    }
+
+    public void setStudentProgress(StudentProgress studentProgress) {
+        this.studentProgress = studentProgress;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
                 "id=" + id +
-                ", jobTitle='" + jobTitle + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", studentProgress=" + studentProgress +
                 '}';
     }
 }
