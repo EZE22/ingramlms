@@ -1,8 +1,6 @@
 package com.example.ingram.demo.rest;
 
 import com.example.ingram.demo.entity.Student;
-import com.example.ingram.demo.entity.StudentProgress;
-import com.example.ingram.demo.service.StudentProgressService;
 import com.example.ingram.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +9,10 @@ import org.springframework.web.bind.annotation.*;
 public class StudentController {
 
     private final StudentService studentService;
-    private final StudentProgressService progressService;
 
     @Autowired
-    public StudentController(StudentService studentService, StudentProgressService progressService) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
-        this.progressService = progressService;
     }
 
     @GetMapping("/getAllStudents")
@@ -27,14 +23,6 @@ public class StudentController {
     @GetMapping("/studentById{studentId}")
     public Object getStudentById(@PathVariable int studentId) {
         return studentService.findById(studentId);
-    }
-
-    @GetMapping("/test/{studentId}/{progressId}")
-    public Object getStudentProgress(@PathVariable int studentId, @PathVariable int progressId) {
-        Student temp = studentService.findById(studentId);
-        StudentProgress progress = progressService.findById(progressId);
-        temp.setStudentProgress(progress);
-        return temp;
     }
 
     @PostMapping("/createStudent")

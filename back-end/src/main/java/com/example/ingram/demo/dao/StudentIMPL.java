@@ -24,7 +24,6 @@ public class StudentIMPL implements StudentDAO {
     public List<Student> findAll() {
         Session currentSession = entityManager.unwrap(Session.class);
         Query<Student> studentData = currentSession.createQuery("from Student");
-
         return studentData.getResultList();
     }
 
