@@ -30,11 +30,11 @@ public class StudentController {
     }
 
     @GetMapping("/test/{studentId}/{progressId}")
-    public String getStudentProgress(@PathVariable int studentId, @PathVariable int progressId) {
+    public Object getStudentProgress(@PathVariable int studentId, @PathVariable int progressId) {
         Student temp = studentService.findById(studentId);
         StudentProgress progress = progressService.findById(progressId);
         temp.setStudentProgress(progress);
-        return temp.toString();
+        return temp;
     }
 
     @PostMapping("/createStudent")

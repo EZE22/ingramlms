@@ -3,6 +3,7 @@ package com.example.ingram.demo.dao;
 import com.example.ingram.demo.entity.Student;
 import com.example.ingram.demo.entity.StudentProgress;
 import org.hibernate.Session;
+import org.hibernate.mapping.Join;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
